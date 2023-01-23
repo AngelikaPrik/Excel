@@ -1,0 +1,24 @@
+{
+  "name": "exel-course",
+  "version": "1.0.0",
+  "description": "Pure JS exel app",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AngelikaPrik/Exel-course.git"
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "exel"
+  ],
+  "author": "Angelina Mamakova <pretzel318@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AngelikaPrik/Exel-course/issues"
+  },
+  "homepage": "https://github.com/AngelikaPrik/Exel-course#readme"
+}
