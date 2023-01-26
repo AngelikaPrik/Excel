@@ -21,14 +21,9 @@ const jsLoaders = () => {
     },
   ];
 
-  if (isDev) {
-    loaders.push({
-      loader: "eslint-loader",
-      options: {
-        fix: true,
-      },
-    });
-  }
+  // if (isDev) {
+  //   loaders.push("eslint-loader");
+  // }
 
   return loaders;
 };
