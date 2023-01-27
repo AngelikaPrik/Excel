@@ -9,6 +9,7 @@
     "require-jsdoc": "off",
     "linebreak-style": "off",
     "eol-last": "off",
-    "arraysInObjects": false
+    "arraysInObjects": false,
+    "operator-linebreak": "off"
   }
 }
