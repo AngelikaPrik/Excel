@@ -1,10 +1,13 @@
-import "./module";
-import "./scss/index.scss"
+import './scss/index.scss'
 
-console.log("working");
+import { Exel } from './components/exel'
+import { Header } from './components/header'
+import { Toolbar } from './components/toolbar'
+import { Formula } from './components/formula'
+import { Table } from './components/table'
 
-async function start() {
-	return await Promise.resolve(console.log("async work"))
-}
+const exel = new Exel('#app', {
+  components: [Header, Toolbar, Formula, Table],
+})
 
-start()
+exel.render()
