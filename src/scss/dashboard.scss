@@ -1,0 +1,94 @@
+@import "variables";
+@import "mixins";
+
+.db {
+  &__header {
+    position: sticky;
+    top: 0;
+    height: $dashboard_header_height;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background: #fff;
+    z-index: 1000;
+  }
+  &__new {
+    padding: 1.5rem;
+    background: #dadce0;
+  }
+  &__table {
+    padding: 1rem 0;
+  }
+  &__create {
+    width: 160px;
+    height: 120px;
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid #dadce0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      color: $green_color;
+      outline: 4px solid rgba($color: $green_color, $alpha: .1);
+    }
+  }
+  &__view {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  &__list-header {
+    display: flex;
+    justify-content: space-between;
+    color: #202124;
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 0 12px;
+  }
+  &__list {
+    @include clear-list();
+  }
+
+  &__record {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+
+    &:hover {
+      background: rgba($color: $green_color, $alpha: .1);
+		border-radius: 4px;
+    }
+
+    a {
+      text-decoration: none;
+      cursor: pointer;
+      color: #202124;
+      font-size: 14px;
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0%;
+        height: 1px;
+        transition: width 0.2s ease-in-out;
+      }
+      &:hover::after {
+        background: $green_color;
+        width: 110%;
+      }
+    }
+  }
+}
