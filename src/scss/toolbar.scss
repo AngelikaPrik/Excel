@@ -1,0 +1,15 @@
+@import "variables";
+@import "mixins";
+
+.exel__toolbar {
+  padding: $padding_main;
+  border-bottom: $border_main;
+  border-top: $border_main;
+  height: $toolbar_height;
+  display: flex;
+  align-items: center;
+
+  & .button {
+	@include button(#296e51)
+  }
+}

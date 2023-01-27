@@ -22,7 +22,7 @@ const jsLoaders = () => {
   ];
 
   // if (isDev) {
-  //   loaders.push("eslint-loader");
+  //   loaders.push('eslint-loader');
   // }
 
   return loaders;
@@ -77,7 +77,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "src/favicon.svg"),
+          from: path.resolve(__dirname, "src/favicon.ico"),
           to: path.resolve(__dirname, "dist"),
         },
       ],

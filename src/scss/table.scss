@@ -1,0 +1,61 @@
+@import "variables";
+@import "mixins";
+
+.exel__table {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: $header_height + $toolbar_height + $formula_height;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  & .row {
+    display: flex;
+    flex-direction: row;
+    min-height: 20px;
+    height: $row-height;
+  }
+  & .row-data {
+    display: flex;
+  }
+  & .row-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 52px;
+    height: 100%;
+    border: 1px solid $border_color;
+    background: #f8f9fa;
+    border-top: none;
+  }
+  & .cell {
+    min-width: 52px;
+    padding: 5px;
+    width: $cell-width;
+    height: 100%;
+    border: 1px solid #e2e3e3;
+    border-top: 0;
+    border-left: 0;
+    color: #111;
+    white-space: nowrap;
+	 outline: 0;
+
+    &.selected {
+      border: none;
+      outline: 2px solid #21bb7b;
+      z-index: 2;
+    }
+  }
+
+  & .column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8f9fa;
+    min-width: 40px;
+    width: $cell-width;
+    border: 1px solid $border_color;
+    border-top: 0;
+    border-left: 0;
+    height: 100%;
+  }
+}
