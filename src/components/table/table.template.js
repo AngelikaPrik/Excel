@@ -19,7 +19,7 @@ const createRow = (content, num = '') => `
 export function createTable(rowsCount = 30) {
   const columnCount = LETTER_CODES.Z - LETTER_CODES.A + 1
   const rows = []
-  const cols = new Array(columnCount)
+  const col = new Array(columnCount)
     .fill('')
     .map(toChar)
     .map(toColumn)
