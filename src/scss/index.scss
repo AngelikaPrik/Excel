@@ -11,6 +11,11 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-y: overlay;
+  overflow-x: overlay;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   font-size: 12px;
@@ -26,4 +31,25 @@ body {
   position: sticky;
   top: 0;
   background: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #a3a3a3;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #7a7a7a;
 }
