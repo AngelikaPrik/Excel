@@ -3,23 +3,46 @@ const LETTER_CODES = {
   Z: 90,
 }
 
-const toChar = (_, i) => String.fromCharCode(LETTER_CODES.A + i)
+function toChar(_, i) {
+  return String.fromCharCode(LETTER_CODES.A + i)
+}
 
-const toCell = () => `<div class="cell" contenteditable></div>`
+function toCell(_, col) {
+  return `
+  <div 
+    class="cell" 
+    contenteditable
+    data-col="${col}"
+  >
+  </div>
+  `
+}
 
-const toColumn = col => `<div class="column">${col}</div>`
-
-const createRow = (content, num = '') => `
-	<div class="row">
-		<div class="row-info">${num}</div>
-		<div class="row-data">${content}</div>
-	</div>
+function toColumn(col, i) {
+  return `
+  <div class="column" data-type="resizable" data-col="${i}">
+    ${col}
+    <div class="col-resize" data-resize="col"></div>
+  </div>
 `
+}
+
+function createRow(content, num = '') {
+  return `
+  <div class="row" data-type="resizable">
+    <div class="row-info">
+    ${num}
+    ${num && '<div class="row-resize" data-resize="row"></div>'}
+    </div>
+    <div class="row-data">${content}</div>
+  </div>
+`
+}
 
 export function createTable(rowsCount = 30) {
   const columnCount = LETTER_CODES.Z - LETTER_CODES.A + 1
   const rows = []
-  const col = new Array(columnCount)
+  const cols = new Array(columnCount)
     .fill('')
     .map(toChar)
     .map(toColumn)
@@ -28,7 +51,10 @@ export function createTable(rowsCount = 30) {
   rows.push(createRow(cols))
 
   for (let i = 1; i < rowsCount + 1; i++) {
-    const cells = new Array(columnCount).fill('').map(toCell).join('')
+    const cells = new Array(columnCount)
+      .fill('')
+      .map(toCell)
+      .join('')
     rows.push(createRow(cells, i))
   }
 
