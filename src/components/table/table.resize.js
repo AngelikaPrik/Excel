@@ -1,8 +1,8 @@
-import { $ } from '../../core/dom'
+import { $ } from '@core/dom'
 
-export function resizeHandler($root, e) {
-  const resizeType = e.target.dataset.resize
-  const $resizer = $(e.target)
+export function resizeHandler($root, event) {
+  const resizeType = event.target.dataset.resize
+  const $resizer = $(event.target)
   const $parent = $resizer.closest('[data-type="resizable"]')
   const coords = $parent.getCoords()
   const sideProp = resizeType === 'col' ? 'bottom' : 'right'
@@ -20,6 +20,7 @@ export function resizeHandler($root, e) {
       value = coords.height + delta
       $resizer.css({ bottom: -delta + 'px' })
     }
+    $root.css({userSelect: "none"})
   }
   document.onmouseup = () => {
     document.onmousemove = null
@@ -34,5 +35,6 @@ export function resizeHandler($root, e) {
     }
 
     $resizer.css({ opacity: 0, bottom: 0, right: 0 })
+    $root.css({userSelect: "auto"})
   }
 }
