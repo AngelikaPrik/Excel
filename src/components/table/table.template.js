@@ -52,9 +52,9 @@ export function createTable(rowsCount = 30) {
 
   rows.push(createRow(cols))
 
-  for (let row = 1; row < rowsCount + 1; row++) {
+  for (let row = 0; row < rowsCount + 1; row++) {
     const cells = new Array(columnCount).fill('').map(toCell(row)).join('')
-    rows.push(createRow(cells, row))
+    rows.push(createRow(cells, row+1))
   }
 
   return rows.join('')

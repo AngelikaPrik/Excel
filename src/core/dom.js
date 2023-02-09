@@ -65,6 +65,10 @@ class Dom {
     }
     return this.dataAttr.id
   }
+  focus() {
+    this.$el.focus()
+    return this
+  }
 }
 $('div').html('<h1>Test</h1>').clear()
 
