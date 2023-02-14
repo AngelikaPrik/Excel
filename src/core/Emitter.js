@@ -1,8 +1,6 @@
 export class Emitter {
   constructor() {
-    this.listeners = {
-      a: ['done'],
-    }
+    this.listeners = {}
   }
 
   emit(event, ...args) {

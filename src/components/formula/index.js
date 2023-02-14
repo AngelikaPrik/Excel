@@ -3,10 +3,11 @@ import { ExelComponent } from '@core/ExelComponent'
 export class Formula extends ExelComponent {
   static className = 'exel__formula'
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Formula',
-      listeners: ['input'],
+      listeners: ['input', 'keydown'],
+      ...options,
     })
   }
 
@@ -18,6 +19,14 @@ export class Formula extends ExelComponent {
   }
 
   onInput(e) {
-    console.log('onInput formula', e)
+    const text = e.target.textContent.trim()
+    this.$emit('formula:input', text)
+  }
+
+  onKeydown(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      this.$emit('formula:done')
+    }
   }
 }

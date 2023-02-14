@@ -8,10 +8,11 @@ import { $ } from '@core/dom'
 export class Table extends ExelComponent {
   static className = 'exel__table'
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Table',
       listeners: ['mousedown', 'keydown'],
+      ...options,
     })
   }
   toHTML() {
@@ -26,6 +27,14 @@ export class Table extends ExelComponent {
     super.init()
     const $cell = this.$root.find('[data-id="1:0"]')
     this.selection.select($cell)
+
+    this.$on('formula:input', text => {
+      this.selection.current.text(text)
+    })
+    
+    this.$on('formula:done', () => {
+        this.selection.current.focus()
+    })
   }
 
   onMousedown(event) {

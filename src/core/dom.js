@@ -10,6 +10,9 @@ class Dom {
     }
     return this.$el.outerHTML.trim()
   }
+  text(text) {
+    this.$el.textContent = text
+  }
   clear() {
     this.html('')
     return this
@@ -70,7 +73,6 @@ class Dom {
     return this
   }
 }
-$('div').html('<h1>Test</h1>').clear()
 
 export function $(selector) {
   return new Dom(selector)
