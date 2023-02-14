@@ -2,6 +2,12 @@ import { ExelComponent } from '@core/ExelComponent'
 
 export class Toolbar extends ExelComponent {
   static className = 'exel__toolbar'
+  constructor($root, options) {
+    super($root, {
+      name: 'Toolbar',
+      ...options
+    })
+  }
 
   toHTML() {
     return `

@@ -7,15 +7,17 @@ function toChar(_, i) {
   return String.fromCharCode(LETTER_CODES.A + i)
 }
 
-function toCell(_, col) {
-  return `
-  <div 
-    class="cell" 
-    contenteditable
-    data-col="${col}"
-  >
-  </div>
-  `
+function toCell(row) {
+  return function (_, col) {
+    return `
+    <div 
+      class="cell"
+      contenteditable
+      data-type="cell"
+      data-col="${col}"
+      data-id="${row}:${col}"
+    ></div> `
+  }
 }
 
 function toColumn(col, i) {
@@ -50,12 +52,9 @@ export function createTable(rowsCount = 30) {
 
   rows.push(createRow(cols))
 
-  for (let i = 1; i < rowsCount + 1; i++) {
-    const cells = new Array(columnCount)
-      .fill('')
-      .map(toCell)
-      .join('')
-    rows.push(createRow(cells, i))
+  for (let row = 0; row < rowsCount + 1; row++) {
+    const cells = new Array(columnCount).fill('').map(toCell(row)).join('')
+    rows.push(createRow(cells, row+1))
   }
 
   return rows.join('')
