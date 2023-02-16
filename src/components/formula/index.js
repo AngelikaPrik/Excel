@@ -1,7 +1,7 @@
-import { ExelComponent } from '@core/ExelComponent'
+import { ExcelComponent } from '@core/ExcelComponent'
 import { $ } from '@core/dom'
 
-export class Formula extends ExelComponent {
+export class Formula extends ExcelComponent {
   static className = 'exel__formula'
 
   constructor($root, options) {
@@ -29,6 +29,9 @@ export class Formula extends ExelComponent {
 
     this.$on('table:input', $cell => {
       this.$formula.text($cell.text())
+    })
+    this.$subscribe(state => {
+      console.log('FormulaState ', state)
     })
   }
 

@@ -1,6 +1,6 @@
-import { ExelComponent } from '@core/ExelComponent'
+import { ExcelComponent } from '@core/ExcelComponent'
 
-export class Header extends ExelComponent {
+export class Header extends ExcelComponent {
   static className = 'exel__header'
 
   constructor($root, options) {

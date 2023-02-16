@@ -1,11 +1,11 @@
-import { ExelComponent } from '@core/ExelComponent'
+import { ExcelComponent } from '@core/ExcelComponent'
 import { isCell, matrix, nextSelector, shouldResize } from './table.functions'
 import { resizeHandler } from './table.resize'
 import { createTable } from './table.template'
 import { TableSelection } from './TableSelection'
 import { $ } from '@core/dom'
 
-export class Table extends ExelComponent {
+export class Table extends ExcelComponent {
   static className = 'exel__table'
 
   constructor($root, options) {
@@ -34,11 +34,15 @@ export class Table extends ExelComponent {
     this.$on('formula:done', () => {
       this.selection.current.focus()
     })
+    this.$subscribe(state => {
+      console.log('TableState ', state)
+    })
   }
 
   selectCell($cell) {
     this.selection.select($cell)
     this.$emit('table:select', $cell)
+    this.$dispatch({ type: 'TEST' })
   }
 
   onMousedown(event) {
@@ -53,7 +57,7 @@ export class Table extends ExelComponent {
         )
         this.selection.selectGroup($cells)
       } else {
-        this.selection.select($target)
+        this.selectCell($target)
       }
     }
   }
