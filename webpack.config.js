@@ -9,7 +9,7 @@ const path = require('path')
 const isProd = process.env.NODE_ENV === 'production'
 const isDev = !isProd
 
-const filename = (ext) => (isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`)
+const filename = ext => (isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`)
 
 const jsLoaders = () => {
   const loaders = [
@@ -20,11 +20,6 @@ const jsLoaders = () => {
       },
     },
   ]
-
-  // if (isDev) {
-  //   loaders.push('eslint-loader');
-  // }
-
   return loaders
 }
 
@@ -37,11 +32,12 @@ module.exports = {
     filename: filename('js'),
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.ts', '.js'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '@core': path.resolve(__dirname, 'src/core'),
-      '@utils': path.resolve(__dirname, 'src/core/utils.js'),
+      '@utils': path.resolve(__dirname, 'src/core/utils.ts'),
+      '@actions': path.resolve(__dirname, 'src/redux/actions.ts'),
     },
   },
   devServer: {
@@ -59,6 +55,11 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: jsLoaders(),
+      },
+      {
+        test: /\.tsx?/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
     ],
   },

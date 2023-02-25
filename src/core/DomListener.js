@@ -1,4 +1,4 @@
-import { capitalize } from '@utils'
+import { capitalize } from './utils'
 
 export class DomListener {
   constructor($root, listeners = []) {
@@ -7,7 +7,7 @@ export class DomListener {
     this.listeners = listeners
   }
   addDomListeners() {
-    this.listeners.forEach((listener) => {
+    this.listeners.forEach(listener => {
       const method = getMethodName(listener)
       if (!this[method]) {
         const name = this.name
@@ -19,8 +19,7 @@ export class DomListener {
     })
   }
   removeDomListeners() {
-	console.log('removeDom')
-    this.listeners.forEach((listener) => {
+    this.listeners.forEach(listener => {
       const method = getMethodName(listener)
       this.$root.off(listener, this[method])
     })

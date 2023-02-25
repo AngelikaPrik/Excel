@@ -4,6 +4,7 @@ export function resizeHandler($root, event) {
   return new Promise(resolve => {
     const resizeType = event.target.dataset.resize
     const $resizer = $(event.target)
+    // const resizeType = $resizer.data.resize
     const $parent = $resizer.closest('[data-type="resizable"]')
     const coords = $parent.getCoords()
     const sideProp = resizeType === 'col' ? 'bottom' : 'right'
@@ -29,7 +30,7 @@ export function resizeHandler($root, event) {
       if (resizeType === 'col') {
         $parent.css({ width: value + 'px' })
         $root
-          .findAll(`[data-col="${$parent.dataAttr.col}"]`)
+          .findAll(`[data-col="${$parent.data.col}"]`)
           .forEach(el => (el.style.width = value + 'px'))
       } else {
         $parent.css({ height: value + 'px' })
@@ -37,7 +38,8 @@ export function resizeHandler($root, event) {
 
       resolve({
         value,
-        id: resizeType === 'col' ? $parent.dataAttr.col : null,
+        resizeType,
+        id: $parent.data[resizeType],
       })
 
       $resizer.css({ opacity: 0, bottom: 0, right: 0 })

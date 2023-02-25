@@ -1,18 +1,29 @@
 import { ExcelComponent } from '@core/ExcelComponent'
+import { changeTitle } from '@actions'
+import { $ } from '@core/dom'
+import { defaultTitle } from '../../constants'
+import { debounce } from '../../core/utils'
 
 export class Header extends ExcelComponent {
-  static className = 'exel__header'
+  static className = 'excel__header'
 
   constructor($root, options) {
-	super($root, {
-	  name: 'Header',
-	  ...options
-	})
- }
+    super($root, {
+      name: 'Header',
+      listeners: ['input'],
+      ...options,
+    })
+  }
+
+  prepare() {
+    this.onInput = debounce(this.onInput, 300)
+  }
 
   toHTML() {
+	const title = this.store.getState().title || defaultTitle
+
     return `
-		<input type="text" class="input" value="Новая таблица" />
+		<input type="text" class="input" value="${title}" />
 			<div class="">
 			<div class="button">
 				<i class="material-icons">exit_to_app</i>
@@ -22,5 +33,10 @@ export class Header extends ExcelComponent {
 			</div>
 			</div>
 		`
+  }
+
+  onInput(e) {
+    const $target = $(e.target)
+    this.$dispatch(changeTitle($target.text()))
   }
 }
