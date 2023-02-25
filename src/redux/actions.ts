@@ -1,60 +1,39 @@
-import { IStyles } from './../constants'
 import { ACTION } from './types'
 
 export interface IData {
   type: ACTION
-  data: ITableResize | IChangeText | IStyles | IApplyStyle | IChangeTitle
+  data: any
 }
 
-export interface ITableResize {
-  id: string
-  value: number
-  resizeType: string
-}
-
-export interface IChangeText {
-  id: string
-  value: string
-}
-
-export interface IApplyStyle {
-  ids: string[]
-  value: IStyles
-}
-
-export interface IChangeTitle {
-  value: string
-}
-
-export function changeTitle(data: IChangeTitle): IData {
+export function changeTitle(data: object): IData {
   return {
     type: ACTION.CHANGE_TITLE,
     data,
   }
 }
 
-export function tableResize(data: ITableResize): IData {
+export function tableResize(data: object): IData {
   return {
     type: ACTION.TABLE_RESIZE,
     data,
   }
 }
 
-export function changeText(data: IChangeText): IData {
+export function changeText(data: object): IData {
   return {
     type: ACTION.CHANGE_TEXT,
     data,
   }
 }
 
-export function changeStyles(data: IStyles): IData {
+export function changeStyles(data: object): IData {
   return {
     type: ACTION.CHANGE_STYLES,
     data,
   }
 }
 
-export function applyStyle(data: IApplyStyle): IData {
+export function applyStyle(data: object): IData {
   return {
     type: ACTION.APPLY_STYLE,
     data,
