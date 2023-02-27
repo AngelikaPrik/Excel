@@ -1,7 +1,17 @@
+import { IData } from './../redux/actions'
+import { IStore } from './createStore'
+import { Emitter } from './Emitter'
+import { Dom } from './dom'
 import { DomListener } from './DomListener'
 
 export class ExcelComponent extends DomListener {
-  constructor($root, options = {}) {
+  readonly name: string
+  emitter: Emitter
+  subscribe: string[]
+  store: IStore
+  unsubscribers: Function[]
+
+  constructor($root: Dom, options: { [key: string]: any } = {}) {
     super($root, options.listeners)
     this.name = options.name || ''
     this.emitter = options.emitter
@@ -14,16 +24,16 @@ export class ExcelComponent extends DomListener {
 
   prepare() {}
 
-  $emit(event, ...args) {
+  $emit(event: string, ...args: any[]) {
     this.emitter.emit(event, ...args)
   }
 
-  $on(event, fn) {
+  $on(event: string, fn: Function) {
     const unsub = this.emitter.subscribe(event, fn)
     this.unsubscribers.push(unsub)
   }
 
-  $dispatch(action) {
+  $dispatch(action: IData) {
     this.store.dispatch(action)
   }
 
@@ -31,9 +41,9 @@ export class ExcelComponent extends DomListener {
     return ''
   }
 
-  storeChanged(changes) {}
+  storeChanged(changes: any) {}
 
-  isWatching(key) {
+  isWatching(key: string) {
     return this.subscribe.includes(key)
   }
 

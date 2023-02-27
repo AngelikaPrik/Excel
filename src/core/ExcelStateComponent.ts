@@ -1,7 +1,7 @@
 import { ExcelComponent } from './ExcelComponent'
 
 export class ExcelStateComponent extends ExcelComponent {
-  constructor(...args) {
+  constructor(...args: ConstructorParameters<typeof ExcelComponent>) {
     super(...args)
   }
 
@@ -13,7 +13,7 @@ export class ExcelStateComponent extends ExcelComponent {
     this.state = { ...initialState }
   }
 
-  setState(newState) {
+  setState(newState: object) {
     this.state = { ...this.state, ...newState }
     this.$root.html(this.template)
   }
