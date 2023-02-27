@@ -1,8 +1,10 @@
+import { IData } from './actions'
+import { IModelState } from './inititalState'
 import { ACTION } from './types'
 
-export function rootReducer(state, action) {
-  let field
-  let val
+export function rootReducer(state: IModelState, action: IData) {
+  let field: string
+  let val: any
   switch (action.type) {
     case ACTION.TABLE_RESIZE:
       field = action.data.resizeType === 'col' ? 'colState' : 'rowState'
@@ -21,9 +23,9 @@ export function rootReducer(state, action) {
 
     case ACTION.APPLY_STYLE:
       field = 'stylesState'
-      val = state[field] || {}
+      val = state[field as keyof IModelState] || {}
 
-      action.data.ids.forEach(id => {
+      action.data.ids.forEach((id: string) => {
         val[id] = { ...val[id], ...action.data.value }
       })
       return {
@@ -40,8 +42,8 @@ export function rootReducer(state, action) {
   }
 }
 
-function value(state, field, action) {
-  const val = state[field] || {}
+function value(state: IModelState, field: string, action: IData) {
+  const val: any = state[field as keyof IModelState] || {}
   val[action.data.id] = action.data.value
   return val
 }

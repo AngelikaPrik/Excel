@@ -1,29 +1,30 @@
+import { IModelState } from './../../redux/inititalState'
 import { toInlineStyles } from '../../core/utils'
 import { defaultStyles } from '../../constants'
 import { parse } from '../../core/parse'
 
-const LETTER_CODES = {
-  A: 65,
-  Z: 90,
+enum LETTER_CODES {
+  A = 65,
+  Z = 90,
 }
 
 const DEFAULT_WIDTH = 120
 const DEFAULT_HEIGHT = 24
 
-function getWidth(state, index) {
-  return (state[index] || DEFAULT_WIDTH) + 'px'
+function getWidth(state: object, index: number): string {
+  return (state[index as keyof typeof state] || DEFAULT_WIDTH) + 'px'
 }
 
-function getHeight(state, index) {
-  return (state[index] || DEFAULT_HEIGHT) + 'px'
+function getHeight(state: object, index: number): string {
+  return (state[index as keyof typeof state] || DEFAULT_HEIGHT) + 'px'
 }
 
-function toChar(_, i) {
+function toChar(_: null, i: number): string {
   return String.fromCharCode(LETTER_CODES.A + i)
 }
 
-function toCell(state, row) {
-  return function (_, col) {
+function toCell(state: IModelState, row: number) {
+  return function (_: null, col: number) {
     const id = `${row}:${col}`
     const width = getWidth(state.colState, col)
     const data = state.dataState[id]
@@ -44,7 +45,8 @@ function toCell(state, row) {
   }
 }
 
-function toColumn({ col, index, width }) {
+function toColumn(column: IColumn) {
+  const { col, index, width } = column
   return `
   <div
     class="column"
@@ -57,7 +59,7 @@ function toColumn({ col, index, width }) {
 `
 }
 
-function createRow(index, content, state = {}) {
+function createRow(index: number, content: string, state = {}) {
   const resize = index ? '<div class="row-resize" data-resize="row"></div>' : ''
   const height = getHeight(state, index)
   return `
@@ -71,8 +73,8 @@ function createRow(index, content, state = {}) {
   `
 }
 
-function withWidthFrom(state) {
-  return function (col, index) {
+function withWidthFrom(state: IModelState) {
+  return function (col: string, index: number): IColumn {
     return {
       col,
       index,
@@ -81,7 +83,7 @@ function withWidthFrom(state) {
   }
 }
 
-export function createTable(rowsCount = 30, state = {}) {
+export function createTable(rowsCount = 30, state: IModelState) {
   const columnCount = LETTER_CODES.Z - LETTER_CODES.A + 1
   const rows = []
   const cols = new Array(columnCount)
@@ -102,4 +104,10 @@ export function createTable(rowsCount = 30, state = {}) {
   }
 
   return rows.join('')
+}
+
+interface IColumn {
+  col: string
+  index: number
+  width: string
 }

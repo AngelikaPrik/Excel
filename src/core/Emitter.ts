@@ -1,9 +1,14 @@
+interface IListener {
+  [key: string]: Function[]
+}
 export class Emitter {
+  listeners: IListener
   constructor() {
     this.listeners = {}
   }
 
-  emit(event, ...args) {
+  emit(event:string, ...args: any[]) {
+
     if (!Array.isArray(this.listeners[event])) {
       return false
     }
@@ -13,7 +18,7 @@ export class Emitter {
     return true
   }
 
-  subscribe(event, fn) {
+  subscribe(event:string, fn: Function) {
     this.listeners[event] = this.listeners[event] || []
     this.listeners[event].push(fn)
     return () => {

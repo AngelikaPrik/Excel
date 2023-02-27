@@ -1,10 +1,14 @@
-import { ExcelComponent } from '@core/ExcelComponent'
-import { $ } from '@core/dom'
+import { IModelState } from './../../redux/inititalState'
+import { $, Dom } from '../../core/dom'
+import { ExcelComponent } from '../../core/ExcelComponent'
 
 export class Formula extends ExcelComponent {
   static className = 'excel__formula'
 
-  constructor($root, options) {
+  constructor(
+    $root: Dom,
+    options: ConstructorParameters<typeof ExcelComponent>
+  ) {
     super($root, {
       name: 'Formula',
       listeners: ['input', 'keydown'],
@@ -25,20 +29,20 @@ export class Formula extends ExcelComponent {
 
     this.$formula = this.$root.find('#formula')
 
-    this.$on('table:select', $cell => {
+    this.$on('table:select', ($cell: Dom) => {
       this.$formula.text($cell.data.value)
     })
   }
 
-  storeChanged({currentText}) {
+  storeChanged({ currentText }: IModelState) {
     this.$formula.text(currentText)
   }
 
-  onInput(e) {
+  onInput(e: InputEvent) {
     this.$emit('formula:input', $(e.target).text())
   }
 
-  onKeydown(e) {
+  onKeydown(e: KeyboardEvent) {
     const keys = ['Enter', 'Tab']
 
     if (keys.includes(e.key)) {
@@ -46,6 +50,4 @@ export class Formula extends ExcelComponent {
       this.$emit('formula:done')
     }
   }
-
-  
 }

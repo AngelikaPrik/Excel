@@ -1,6 +1,18 @@
-export function createStore(rootReducer, initialState = {}) {
+import { IData } from './../redux/actions'
+import { IModelState } from './../redux/inititalState'
+
+export interface IStore {
+  subscribe: (fn: Function) => { unsubscribe: Function }
+  dispatch: (action: IData) => void
+  getState: () => IModelState
+}
+
+export function createStore(
+  rootReducer: Function,
+  initialState: IModelState
+): IStore {
   let state = rootReducer({ ...initialState }, { type: 'INIT' })
-  let listeners = []
+  let listeners: Function[] = []
 
   return {
     subscribe(fn) {
@@ -15,7 +27,7 @@ export function createStore(rootReducer, initialState = {}) {
       state = rootReducer(state, action)
       listeners.forEach(listener => listener(state))
     },
-    getState() {
+    getState(): IModelState {
       return JSON.parse(JSON.stringify(state))
     },
   }

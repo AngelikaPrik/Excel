@@ -5,8 +5,8 @@ import { storage } from '../core/utils'
 export interface IModelState {
   rowState: object
   colState: object
-  dataState: object
-  stylesState: object
+  dataState: { [key: string]: string }
+  stylesState: { [key: string]: { [key: string]: string } }
   currentStyles: IStyles
   currentText: string
   title: string

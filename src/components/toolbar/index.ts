@@ -1,11 +1,17 @@
+import { IStyles } from './../../constants'
+import { IModelState } from './../../redux/inititalState'
+import { Dom } from './../../core/dom'
+import { ExcelStateComponent } from './../../core/ExcelStateComponent'
 import { createToolbar } from './toolbar.template'
-import { $ } from '@core/dom'
-import { ExcelStateComponent } from '@core/ExcelStateComponent'
 import { defaultStyles } from '../../constants'
+import { $ } from '../../core/dom'
 
 export class Toolbar extends ExcelStateComponent {
   static className = 'excel__toolbar'
-  constructor($root, options) {
+  constructor(
+    $root: Dom,
+    options: ConstructorParameters<typeof ExcelStateComponent>
+  ) {
     super($root, {
       name: 'Toolbar',
       listeners: ['click'],
@@ -26,11 +32,11 @@ export class Toolbar extends ExcelStateComponent {
     return this.template
   }
 
-  storeChanged(changes) {
+  storeChanged(changes: IModelState) {
     this.setState(changes.currentStyles)
   }
 
-  onClick(event) {
+  onClick(event: PointerEvent) {
     const $target = $(event.target)
 
     if ($target.data.type === 'button') {

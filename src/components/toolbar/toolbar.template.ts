@@ -1,4 +1,7 @@
-function toButton({ icon, active, value }) {
+import { IStyles } from './../../constants'
+
+function toButton(buttonData: IButtonData) {
+  const { icon, active, value } = buttonData
   const prefix = 'format_'
   const meta = `data-type='button' data-value='${JSON.stringify(value)}'`
 
@@ -10,7 +13,7 @@ function toButton({ icon, active, value }) {
 	</div>
 	`
 }
-export function createToolbar(s) {
+export function createToolbar(s: IStyles) {
   const buttons = [
     {
       icon: 'align_left',
@@ -50,4 +53,10 @@ export function createToolbar(s) {
   ]
 
   return buttons.map(toButton).join('')
+}
+
+interface IButtonData {
+  icon: string
+  active: boolean
+  value: IStyles
 }

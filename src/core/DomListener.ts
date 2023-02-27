@@ -1,7 +1,12 @@
+import { Dom } from './dom'
 import { capitalize } from './utils'
 
 export class DomListener {
-  constructor($root, listeners = []) {
+  [x: string]: any
+  $root: Dom
+  listeners: string[]
+
+  constructor($root: Dom, listeners = ['']) {
     if (!$root) throw new Error('No root provided for DomListener')
     this.$root = $root
     this.listeners = listeners
@@ -26,6 +31,6 @@ export class DomListener {
   }
 }
 
-function getMethodName(eventName) {
+function getMethodName(eventName: string): string {
   return 'on' + capitalize(eventName)
 }
