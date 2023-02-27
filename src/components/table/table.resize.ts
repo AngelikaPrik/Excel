@@ -1,14 +1,14 @@
-import { $ } from '@core/dom'
+import { Dom } from './../../core/dom'
+import { $ } from '../../core/dom'
 
-export function resizeHandler($root, event) {
+export function resizeHandler($root: Dom, event: MouseEvent) {
   return new Promise(resolve => {
-    const resizeType = event.target.dataset.resize
     const $resizer = $(event.target)
-    // const resizeType = $resizer.data.resize
+    const resizeType = $resizer.data.resize
     const $parent = $resizer.closest('[data-type="resizable"]')
     const coords = $parent.getCoords()
     const sideProp = resizeType === 'col' ? 'bottom' : 'right'
-    let value
+    let value: number
 
     $resizer.css({ opacity: 1, [sideProp]: '-2000px' })
 
@@ -31,7 +31,9 @@ export function resizeHandler($root, event) {
         $parent.css({ width: value + 'px' })
         $root
           .findAll(`[data-col="${$parent.data.col}"]`)
-          .forEach(el => (el.style.width = value + 'px'))
+          .forEach((el: HTMLDivElement) => {
+            el.style.width = value + 'px'
+          })
       } else {
         $parent.css({ height: value + 'px' })
       }

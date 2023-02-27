@@ -1,14 +1,21 @@
+import { Dom } from './../../core/dom'
 import { range } from '../../core/utils'
 
-export function shouldResize(event) {
-  return event.target.dataset.resize
+export function shouldResize(event: MouseEvent): string {
+  const target = event.target as HTMLDivElement
+  if (target) {
+    return target.dataset.resize
+  }
 }
 
-export function isCell(event) {
-  return event.target.dataset.type === 'cell'
+export function isCell(event: MouseEvent): boolean {
+  const target = event.target as HTMLDivElement
+  if (target) {
+    return target.dataset.type === 'cell'
+  }
 }
 
-export function matrix($target, $current) {
+export function matrix($target: Dom, $current: Dom) {
   const target = $target.id(true)
   const current = $current.id(true)
 
@@ -21,7 +28,10 @@ export function matrix($target, $current) {
   }, [])
 }
 
-export function nextSelector(key, { col, row }) {
+export function nextSelector(
+  key: string,
+  { col, row }: { [key: string]: number }
+) {
   const MIN_VALUE = 0
   switch (key) {
     case 'Enter':

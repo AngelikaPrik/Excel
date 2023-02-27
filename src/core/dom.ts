@@ -2,7 +2,7 @@ import { IStyles } from './../constants'
 
 export class Dom {
   $el: any
-  constructor(selector: HTMLElement | string) {
+  constructor(selector: HTMLElement | EventTarget | string) {
     this.$el =
       typeof selector === 'string' ? document.querySelector(selector) : selector
   }
@@ -14,7 +14,7 @@ export class Dom {
     }
     return this.$el.outerHTML.trim()
   }
-  text(text: string) {
+  text(text?: string) {
     if (typeof text !== 'undefined') {
       this.$el.textContent = text
       return this
@@ -102,7 +102,7 @@ export class Dom {
   }
 }
 
-export function $(selector: string | HTMLElement): Dom {
+export function $(selector: string | HTMLElement | EventTarget): Dom {
   return new Dom(selector)
 }
 
