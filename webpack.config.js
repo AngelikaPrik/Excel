@@ -26,7 +26,7 @@ const jsLoaders = () => {
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   mode: 'development',
-  entry: ['@babel/polyfill', './index.js'],
+  entry: ['@babel/polyfill', './index.ts'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: filename('js'),
