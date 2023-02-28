@@ -1,5 +1,5 @@
-import { Dom } from './../../core/dom'
-import { range } from '../../core/utils'
+import { Dom } from '@core/dom'
+import { range } from '@core/utils'
 
 export function shouldResize(event: MouseEvent): string {
   const target = event.target as HTMLDivElement

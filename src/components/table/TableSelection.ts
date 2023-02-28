@@ -1,5 +1,4 @@
-import { IStyles } from './../../constants'
-import { Dom } from './../../core/dom'
+import { Dom } from '@core/dom'
 export class TableSelection {
   static className = 'selected'
   group: Dom[]

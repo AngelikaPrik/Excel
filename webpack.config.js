@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 const path = require('path')
 
@@ -11,22 +12,11 @@ const isDev = !isProd
 
 const filename = ext => (isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`)
 
-const jsLoaders = () => {
-  const loaders = [
-    {
-      loader: 'babel-loader',
-      options: {
-        presets: ['@babel/preset-env'],
-      },
-    },
-  ]
-  return loaders
-}
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   mode: 'development',
-  entry: ['@babel/polyfill', './index.ts'],
+  entry: './index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: filename('js'),
@@ -37,7 +27,8 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
       '@core': path.resolve(__dirname, 'src/core'),
       '@utils': path.resolve(__dirname, 'src/core/utils.ts'),
-      '@actions': path.resolve(__dirname, 'src/redux/actions.ts'),
+      '@redux': path.resolve(__dirname, 'src/redux'),
+      '@constants': path.resolve(__dirname, 'src/constants.ts'),
     },
   },
   devServer: {
@@ -52,14 +43,8 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.m?js$/,
-        exclude: /node_modules/,
-        use: jsLoaders(),
-      },
-      {
-        test: /\.tsx?/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
+        test: /\.ts?$/,
+        loader: 'ts-loader',
       },
     ],
   },
@@ -68,6 +53,7 @@ module.exports = {
     minimize: true,
   },
   plugins: [
+    new TsconfigPathsPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: 'index.html',

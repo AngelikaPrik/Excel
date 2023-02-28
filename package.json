@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "tsconfig-paths-webpack-plugin": "^4.0.0"
   }
 }

@@ -1,15 +1,16 @@
+import { createStore } from '@core/createStore';
 import './scss/index.scss'
 
 import { Excel } from './components/excel'
 
-import { createStore } from './core/createStore'
-import { rootReducer } from './redux/rootReducer'
-import { debounce, storage } from './core/utils'
-import { IModelState, initialState } from './redux/inititalState'
+import { rootReducer } from '@redux/rootReducer'
+import { debounce, storage } from '@core/utils'
+import { IModelState, initialState } from '@redux/inititalState'
 import { Header } from './components/header'
 import { Toolbar } from './components/toolbar'
 import { Formula } from './components/formula'
 import { Table } from './components/table'
+
 
 const store = createStore(rootReducer, initialState)
 

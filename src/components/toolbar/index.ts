@@ -1,10 +1,9 @@
-import { IStyles } from './../../constants'
-import { IModelState } from './../../redux/inititalState'
-import { Dom } from './../../core/dom'
-import { ExcelStateComponent } from './../../core/ExcelStateComponent'
+import { IModelState } from '@redux/inititalState'
+import { Dom } from '@core/dom'
+import { ExcelStateComponent } from '@core/ExcelStateComponent'
 import { createToolbar } from './toolbar.template'
-import { defaultStyles } from '../../constants'
-import { $ } from '../../core/dom'
+import { defaultStyles } from '@constants'
+import { $ } from '@core/dom'
 
 export class Toolbar extends ExcelStateComponent {
   static className = 'excel__toolbar'

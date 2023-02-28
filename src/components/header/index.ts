@@ -1,10 +1,10 @@
-import { Dom } from './../../core/dom'
-import { ExcelComponent } from './../../core/ExcelComponent'
+import { Dom } from '@core/dom'
+import { ExcelComponent } from '@core/ExcelComponent'
 
-import { defaultTitle } from '../../constants'
-import { debounce } from '../../core/utils'
-import { $ } from '../../core/dom'
-import { changeTitle } from '../../redux/actions'
+import { defaultTitle } from '@constants'
+import { debounce } from '@core/utils'
+import { $ } from '@core/dom'
+import { changeTitle } from '@redux/actions'
 
 export class Header extends ExcelComponent {
   static className = 'excel__header'

@@ -1,10 +1,8 @@
-import { ExcelStateComponent } from './../../core/ExcelStateComponent'
-import { ExcelComponent } from './../../core/ExcelComponent'
-import { IStore } from './../../core/createStore'
-import { Dom } from './../../core/dom'
-import { StoreSubscriber } from '../../core/StoreSubscriber'
-import { Emitter } from '../../core/Emitter'
-import { $ } from '../../core/dom'
+import { IStore } from '@core/createStore'
+import { Dom } from '@core/dom'
+import { StoreSubscriber } from '@core/StoreSubscriber'
+import { Emitter } from '@core/Emitter'
+import { $ } from '@core/dom'
 
 export class Excel {
   $el: Dom
