@@ -1,6 +1,6 @@
-import { IModelState } from './../../redux/inititalState'
-import { $, Dom } from '../../core/dom'
-import { ExcelComponent } from '../../core/ExcelComponent'
+import { IModelState } from '@redux/inititalState'
+import { $, Dom } from '@core/dom'
+import { ExcelComponent } from '@core/ExcelComponent'
 
 export class Formula extends ExcelComponent {
   static className = 'excel__formula'

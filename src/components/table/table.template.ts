@@ -1,7 +1,7 @@
-import { IModelState } from './../../redux/inititalState'
-import { toInlineStyles } from '../../core/utils'
-import { defaultStyles } from '../../constants'
-import { parse } from '../../core/parse'
+import { IModelState } from '@redux/inititalState'
+import { toInlineStyles } from '@core/utils'
+import { defaultStyles } from '@constants'
+import { parse } from '@core/parse'
 
 enum LETTER_CODES {
   A = 65,

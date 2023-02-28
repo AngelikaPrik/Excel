@@ -1,5 +1,5 @@
 import { IStore } from './createStore'
-import { IModelState } from './../redux/inititalState'
+import { IModelState } from '@redux/inititalState'
 import { ExcelComponent } from './ExcelComponent'
 import { isEqual } from './utils'
 

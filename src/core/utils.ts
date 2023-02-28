@@ -1,6 +1,6 @@
-import { IData } from './../redux/actions'
-import { IStyles } from './../constants'
-import { IModelState } from './../redux/inititalState'
+import { IStyles } from '@constants'
+import { IModelState } from '@redux/inititalState'
+
 export function capitalize(str: string): string {
   if (typeof str !== 'string') {
     return ''
@@ -37,7 +37,7 @@ export function toKebabCase(str: string): string {
   if (typeof str !== 'string') {
     return
   }
-  return str.replace(/[A-Z]/g, m => '-' + m.toLowerCase())
+  return str.replace(/[A-Z]/g, m => '-' + m.toLowerCase());
 }
 
 export function toInlineStyles(styles: IStyles = {}) {

@@ -1,5 +1,5 @@
-import { Dom } from './../../core/dom'
-import { $ } from '../../core/dom'
+import { Dom } from '@core/dom'
+import { $ } from '@core/dom'
 
 export function resizeHandler($root: Dom, event: MouseEvent) {
   return new Promise(resolve => {

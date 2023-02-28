@@ -1,4 +1,4 @@
-import { IData } from './../redux/actions'
+import { IData } from '@redux/actions'
 import { IStore } from './createStore'
 import { Emitter } from './Emitter'
 import { Dom } from './dom'

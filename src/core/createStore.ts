@@ -1,5 +1,5 @@
-import { IData } from './../redux/actions'
-import { IModelState } from './../redux/inititalState'
+import { IData } from '@redux/actions'
+import { IModelState } from '@redux/inititalState'
 
 export interface IStore {
   subscribe: (fn: Function) => { unsubscribe: Function }

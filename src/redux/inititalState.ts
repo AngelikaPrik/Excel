@@ -1,5 +1,4 @@
-import { defaultTitle, IStyles } from './../constants'
-import { defaultStyles } from '../constants'
+import { defaultTitle, IStyles, defaultStyles } from '@constants'
 import { storage } from '../core/utils'
 
 export interface IModelState {
