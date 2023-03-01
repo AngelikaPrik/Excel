@@ -37,7 +37,7 @@ export function toKebabCase(str: string): string {
   if (typeof str !== 'string') {
     return
   }
-  return str.replace(/[A-Z]/g, m => '-' + m.toLowerCase());
+  return str.replace(/[A-Z]/g, m => '-' + m.toLowerCase())
 }
 
 export function toInlineStyles(styles: IStyles = {}) {
@@ -58,4 +58,12 @@ export function debounce(fn: Function, wait: number) {
     clearTimeout(timeout)
     timeout = setTimeout(later, wait)
   }
+}
+
+export function clone(obj: {}) {
+  return JSON.parse(JSON.stringify(obj))
+}
+
+export function preventDefault(event: Event) {
+  event.preventDefault()
 }

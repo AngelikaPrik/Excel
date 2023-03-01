@@ -4,6 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const webpack = require('webpack')
 
 const path = require('path')
 
@@ -11,7 +12,6 @@ const isProd = process.env.NODE_ENV === 'production'
 const isDev = !isProd
 
 const filename = ext => (isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`)
-
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -26,9 +26,10 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '@core': path.resolve(__dirname, 'src/core'),
-      '@utils': path.resolve(__dirname, 'src/core/utils.ts'),
       '@redux': path.resolve(__dirname, 'src/redux'),
       '@constants': path.resolve(__dirname, 'src/constants.ts'),
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@components': path.resolve(__dirname, 'src/components'),
     },
   },
   devServer: {
@@ -71,5 +72,8 @@ module.exports = {
       ],
     }),
     new MiniCssExtractPlugin({ filename: filename('css') }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    })
   ],
 }

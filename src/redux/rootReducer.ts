@@ -37,6 +37,9 @@ export function rootReducer(state: IModelState, action: IData) {
     case ACTION.CHANGE_TITLE:
       return { ...state, title: action.data }
 
+    case ACTION.UPDATE_OPENING_DATE:
+      return { ...state, openingDate: new Date().toJSON() }
+
     default:
       return state
   }

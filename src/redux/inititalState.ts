@@ -1,5 +1,5 @@
 import { defaultTitle, IStyles, defaultStyles } from '@constants'
-import { storage } from '../core/utils'
+import { clone } from '@core/utils'
 
 export interface IModelState {
   rowState: object
@@ -9,6 +9,7 @@ export interface IModelState {
   currentStyles: IStyles
   currentText: string
   title: string
+  openingDate: string
 }
 
 const defaultState: IModelState = {
@@ -19,6 +20,7 @@ const defaultState: IModelState = {
   currentStyles: defaultStyles,
   currentText: '',
   title: defaultTitle,
+  openingDate: new Date().toJSON(),
 }
 
 const normilize = (state: IModelState): IModelState => ({
@@ -27,6 +29,6 @@ const normilize = (state: IModelState): IModelState => ({
   currentText: '',
 })
 
-export const initialState: IModelState = storage('excel-state')
-  ? normilize(storage('excel-state'))
-  : defaultState
+export const normilizeInitialState = (state: IModelState) => {
+  return state ? normilize(state) : clone(defaultState)
+}

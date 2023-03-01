@@ -39,3 +39,10 @@ export function applyStyle(data: object): IData {
     data,
   }
 }
+
+export function updateDate(data?: object): IData {
+  return {
+    type: ACTION.UPDATE_OPENING_DATE,
+    data,
+  }
+}
