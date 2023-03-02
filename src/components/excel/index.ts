@@ -7,14 +7,14 @@ import { preventDefault } from '@core/utils'
 import { ExcelComponent } from '@core/ExcelComponent'
 
 export class Excel {
-  components: ExcelComponent[]
-  componentsClass: any[]
+  excelComponents: ExcelComponent[]
+  excelComponentClasses: any[]
   store: IStore
   emitter: Emitter
   subscriber: StoreSubscriber
 
   constructor(options: IOptions) {
-    this.componentsClass = options.componentsClass || []
+    this.excelComponentClasses = options.excelComponentClasses || []
     this.store = options.store
     this.emitter = new Emitter()
     this.subscriber = new StoreSubscriber(this.store)
@@ -28,9 +28,9 @@ export class Excel {
       store: this.store,
     }
 
-    this.components = this.componentsClass.map((Component) => {
+    this.excelComponents = this.excelComponentClasses.map(Component => {
       const $el = $.create('div', Component.className)
-      const component = new Component($el, componentOptions);
+      const component = new Component($el, componentOptions)
       $el.html(component.toHTML())
       $root.append($el)
 
@@ -41,23 +41,23 @@ export class Excel {
   }
 
   init() {
-    if(process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === 'production') {
       document.addEventListener('contextmenu', preventDefault)
     }
 
     this.store.dispatch(updateDate())
-    this.subscriber.subscribeComponents(this.components)
-    this.components.forEach(component => component.init())
+    this.subscriber.subscribeComponents(this.excelComponents)
+    this.excelComponents.forEach(component => component.init())
   }
 
   destroy() {
     this.subscriber.unsubscribeFromStore()
-    this.components.forEach(component => component.destroy())
+    this.excelComponents.forEach(component => component.destroy())
     document.removeEventListener('contextmenu', preventDefault)
   }
 }
 
 interface IOptions {
-  componentsClass: any[]
+  excelComponentClasses: any[]
   store: IStore
 }

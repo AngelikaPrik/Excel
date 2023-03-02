@@ -1,4 +1,3 @@
-import { DashboardPage } from '@pages/DashboardPage';
 import { Excel, Formula, Header, Table, Toolbar } from '@components'
 import { createStore } from '@core/createStore'
 import { Page } from '@core/Page'
@@ -27,7 +26,7 @@ export class ExcelPage extends Page {
     store.subscribe(stateListener)
 
     this.excel = new Excel({
-      componentsClass: [Header, Toolbar, Formula, Table],
+      excelComponentClasses: [Header, Toolbar, Formula, Table],
       store,
     })
 
