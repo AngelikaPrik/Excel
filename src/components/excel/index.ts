@@ -4,15 +4,17 @@ import { Emitter } from '@core/Emitter'
 import { $ } from '@core/dom'
 import { updateDate } from '@redux/actions'
 import { preventDefault } from '@core/utils'
+import { ExcelComponent } from '@core/ExcelComponent'
 
 export class Excel {
-  components: any[]
+  components: ExcelComponent[]
+  componentsClass: any[]
   store: IStore
   emitter: Emitter
   subscriber: StoreSubscriber
 
   constructor(options: IOptions) {
-    this.components = options.components || []
+    this.componentsClass = options.componentsClass || []
     this.store = options.store
     this.emitter = new Emitter()
     this.subscriber = new StoreSubscriber(this.store)
@@ -26,9 +28,9 @@ export class Excel {
       store: this.store,
     }
 
-    this.components = this.components.map(Component => {
+    this.components = this.componentsClass.map((Component) => {
       const $el = $.create('div', Component.className)
-      const component = new Component($el, componentOptions)
+      const component = new Component($el, componentOptions);
       $el.html(component.toHTML())
       $root.append($el)
 
@@ -56,6 +58,6 @@ export class Excel {
 }
 
 interface IOptions {
-  components: any[]
+  componentsClass: any[]
   store: IStore
 }
