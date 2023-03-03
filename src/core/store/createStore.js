@@ -1,18 +1,14 @@
 import { IData } from '@redux/actions'
 import { IModelState } from '@redux/inititalState'
 
-export interface IStore {
-  subscribe: (fn: Function) => { unsubscribe: Function }
-  dispatch: (action: IData) => void
-  getState: () => IModelState
-}
+
 
 export function createStore(
-  rootReducer: Function,
-  initialState: IModelState
-): IStore {
+  rootReducer,
+  initialState
+)  {
   let state = rootReducer({ ...initialState }, { type: 'INIT' })
-  let listeners: Function[] = []
+  let listeners  = []
 
   return {
     subscribe(fn) {
@@ -27,7 +23,7 @@ export function createStore(
       state = rootReducer(state, action)
       listeners.forEach(listener => listener(state))
     },
-    getState(): IModelState {
+    getState() {
       return JSON.parse(JSON.stringify(state))
     },
   }

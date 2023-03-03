@@ -44,6 +44,11 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
+      {
         test: /\.ts?$/,
         loader: 'ts-loader',
       },
@@ -74,6 +79,6 @@ module.exports = {
     new MiniCssExtractPlugin({ filename: filename('css') }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    })
+    }),
   ],
 }
