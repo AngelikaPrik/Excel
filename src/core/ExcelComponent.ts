@@ -1,5 +1,5 @@
-import { IData } from '@redux/actions'
-import { IStore } from './createStore'
+import { IData } from './models' 
+import { IStore } from './models'
 import { Emitter } from './Emitter'
 import { Dom } from './dom'
 import { DomListener } from './DomListener'

@@ -1,4 +1,4 @@
-import { IModelState } from '@redux/inititalState'
+import { IModelState } from '@core/models'
 import { Dom } from '@core/dom'
 import { ExcelStateComponent } from '@core/ExcelStateComponent'
 import { createToolbar } from './toolbar.template'

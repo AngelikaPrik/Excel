@@ -1,2 +1,2 @@
-export * from './DashboardPage'
-export * from './ExcelPage'
+export { DashboardPage } from './DashboardPage'
+export { ExcelPage } from './ExcelPage'

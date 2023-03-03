@@ -1,5 +1,5 @@
-import { IStyles } from '@constants'
-import { IModelState } from '@redux/inititalState'
+import { IStyles } from './models' 
+import { IModelState } from './models'
 
 export function capitalize(str: string): string {
   if (typeof str !== 'string') {

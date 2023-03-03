@@ -1,4 +1,4 @@
-import { IStyles } from '@constants'
+import { IStyles } from "./models" 
 
 export class Dom {
   $el: any
