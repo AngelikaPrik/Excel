@@ -1,5 +1,4 @@
 import { ACTION } from '@redux/types'
-import { Page } from './Page'
 
 export interface IStore {
   subscribe: (fn: Function) => { unsubscribe: Function }
