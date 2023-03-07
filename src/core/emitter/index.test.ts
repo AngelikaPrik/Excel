@@ -1,4 +1,4 @@
-import { Emitter } from '.'
+import { Emitter } from './index'
 
 describe('Emmiter: ', () => {
   let emitter: Emitter

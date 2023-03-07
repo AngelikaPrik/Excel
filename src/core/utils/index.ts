@@ -57,15 +57,12 @@ export function debounce(fn: Function, wait: number) {
   let timeout: ReturnType<typeof setTimeout>
 
   return function (this: any, ...args: any[]) {
-    console.log(timeout, 'before later')
     const later = () => {
-      console.log(timeout, 'in later')
       clearTimeout(timeout)
       fn.apply(this, args)
     }
     
     clearTimeout(timeout)
-    console.log(timeout, 'after clearTimeout')
     timeout = setTimeout(later, wait)
   }
 }

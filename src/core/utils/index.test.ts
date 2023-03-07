@@ -1,4 +1,4 @@
-import { IModelState } from '@core/models'
+import { IModelState } from '../models'
 import {
   capitalize,
   range,
@@ -26,7 +26,9 @@ describe('capitalize: ', () => {
   test('should return empty string if argument is not a string', () => {
     //  @ts-ignore
     expect(capitalize(123)).toBe('')
+    //  @ts-ignore
     expect(capitalize(null)).toBe('')
+    //  @ts-ignore
     expect(capitalize(undefined)).toBe('')
     //  @ts-ignore
     expect(capitalize([])).toBe('')
