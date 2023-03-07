@@ -1,13 +1,17 @@
-import { $, Dom } from '@core/dom'
-import { Page } from '@core/Page'
+import { $, Dom } from '../dom'
+import { IRoutesModel } from '../models'
+import { Page } from '../Page'
 import { ActiveRoute } from './ActiveRoute'
 
 export class Router {
   $placeholder: Dom
-  routes: any
+  routes: IRoutesModel
   page: Page
 
-  constructor(selector: string, routes: IRoutesModel) {
+  constructor(
+    selector: HTMLElement | EventTarget | string,
+    routes: IRoutesModel
+  ) {
     if (!selector) {
       throw new Error('Selector is not provided in Router')
     }
@@ -34,6 +38,7 @@ export class Router {
       : this.routes.dashboard
 
     this.page = new Page(ActiveRoute.param)
+
     this.$placeholder.append(this.page.getRoot())
 
     this.page.afterRender()
@@ -42,9 +47,4 @@ export class Router {
   destroy() {
     window.removeEventListener('hashchange', this.changePageHandler)
   }
-}
-
-interface IRoutesModel {
-  dashboard: InstanceType<typeof Page>
-  excel: InstanceType<typeof Page>
 }

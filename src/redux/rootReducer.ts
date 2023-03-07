@@ -1,8 +1,7 @@
-import { IData } from './actions'
-import { IModelState } from './inititalState'
+import { IModelState, IData } from '@core/models'
 import { ACTION } from './types'
 
-export function rootReducer(state: IModelState, action: IData) {
+export function rootReducer(state: IModelState, action: IData): IModelState {
   let field: string
   let val: any
   switch (action.type) {

@@ -1,3 +1,5 @@
+import { Dom } from './dom'
+
 export class Page {
   params: string
 

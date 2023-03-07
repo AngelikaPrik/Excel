@@ -1,16 +1,6 @@
-import { defaultTitle, IStyles, defaultStyles } from '@constants'
+import { defaultTitle, defaultStyles } from '@constants'
+import { IModelState } from '@core/models'
 import { clone } from '@core/utils'
-
-export interface IModelState {
-  rowState: object
-  colState: object
-  dataState: { [key: string]: string }
-  stylesState: { [key: string]: { [key: string]: string } }
-  currentStyles: IStyles
-  currentText: string
-  title: string
-  openingDate: string
-}
 
 const defaultState: IModelState = {
   rowState: {},

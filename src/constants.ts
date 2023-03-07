@@ -1,10 +1,6 @@
-export interface IStyles {
-  textAlign?: string,
-  fontWeight?: string,
-  fontStyle?: string,
-  textDecoration?: string,
-}
-export const defaultStyles:IStyles = {
+import { IStyles } from '@core/models'
+
+export const defaultStyles: IStyles = {
   textAlign: 'left',
   fontWeight: 'normal',
   fontStyle: 'normal',

@@ -1,9 +1,5 @@
+import { IData } from '@core/models'
 import { ACTION } from './types'
-
-export interface IData {
-  type: ACTION
-  data: any
-}
 
 export function changeTitle(data: object): IData {
   return {

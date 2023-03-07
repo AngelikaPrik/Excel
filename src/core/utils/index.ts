@@ -1,5 +1,5 @@
-import { IStyles } from '@constants'
-import { IModelState } from '@redux/inititalState'
+import { IStyles } from '../models'
+import { IModelState } from '../models'
 
 export function capitalize(str: string): string {
   if (typeof str !== 'string') {
@@ -9,14 +9,18 @@ export function capitalize(str: string): string {
 }
 
 export function range(start: number, end: number): number[] {
+  if (typeof start !== 'number' || typeof end !== 'number') {
+    throw new TypeError(`${start} || ${end} is not numbers`)
+  }
+
   if (start > end) [end, start] = [start, end]
   return new Array(end - start + 1).fill('').map((_, i) => start + i)
 }
 
-export function storage(
-  key: string,
-  data: IModelState = null
-): IModelState | never {
+export function storage(key: string, data: IModelState = null): IModelState {
+  if (!key) {
+    throw new Error('Key is not defined')
+  }
   if (!data) {
     return JSON.parse(localStorage.getItem(key))
   }
@@ -27,6 +31,9 @@ export function isEqual(
   a: string | number | object,
   b: string | number | object
 ): boolean {
+  if (typeof a === 'undefined' || typeof b === 'undefined') {
+    throw new Error('Arg is not defined')
+  }
   if (typeof a === 'object' && typeof b === 'object') {
     return JSON.stringify(a) === JSON.stringify(b)
   }
@@ -43,19 +50,22 @@ export function toKebabCase(str: string): string {
 export function toInlineStyles(styles: IStyles = {}) {
   return Object.keys(styles)
     .map(key => `${toKebabCase(key)}: ${styles[key as keyof IStyles]}`)
-    .join(';  ')
+    .join('; ')
 }
 
 export function debounce(fn: Function, wait: number) {
   let timeout: ReturnType<typeof setTimeout>
 
-  return function (...args: any[]) {
+  return function (this: any, ...args: any[]) {
+    console.log(timeout, 'before later')
     const later = () => {
+      console.log(timeout, 'in later')
       clearTimeout(timeout)
       fn.apply(this, args)
     }
-
+    
     clearTimeout(timeout)
+    console.log(timeout, 'after clearTimeout')
     timeout = setTimeout(later, wait)
   }
 }

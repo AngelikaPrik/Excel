@@ -1,5 +1,5 @@
 import { Dom } from '@core/dom'
-import { defaultStyles, IStyles } from '@constants'
+import { defaultStyles } from '@constants'
 import { ExcelComponent } from '@core/ExcelComponent'
 import { isCell, matrix, nextSelector, shouldResize } from './table.functions'
 import { resizeHandler } from './table.resize'
@@ -8,6 +8,7 @@ import { TableSelection } from './TableSelection'
 import { $ } from '@core/dom'
 import * as actions from '@redux/actions'
 import { parse } from '@core/parse'
+import { IStyles } from '@core/models'
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'

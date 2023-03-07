@@ -1,4 +1,4 @@
-import { IStyles } from '@constants'
+import { IStyles } from "@core/models" 
 
 function toButton(buttonData: IButtonData) {
   const { icon, active, value } = buttonData
