@@ -10,13 +10,12 @@ export class Excel {
   excelComponents: ExcelComponent[]
   excelComponentClasses: any[]
   store: IStore
-  emitter: Emitter
+  emitter: Emitter = new Emitter()
   subscriber: StoreSubscriber
 
   constructor(options: IOptions) {
     this.excelComponentClasses = options.excelComponentClasses || []
     this.store = options.store
-    this.emitter = new Emitter()
     this.subscriber = new StoreSubscriber(this.store)
   }
 

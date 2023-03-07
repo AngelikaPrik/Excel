@@ -3,14 +3,12 @@ import { IModelState, IStore } from './models'
 import { isEqual } from './utils'
 
 export class StoreSubscriber {
-  prevState: IModelState | {}
+  prevState: IModelState | {} = {}
   store: IStore
-  sub: any
+  sub: any = null
 
   constructor(store: IStore) {
     this.store = store
-    this.sub = null
-    this.prevState = {}
   }
 
   subscribeComponents(components: ExcelComponent[]) {
