@@ -1,5 +1,5 @@
 import { StoreSubscriber } from '@core/StoreSubscriber'
-import { Emitter } from '@core/Emitter'
+import { Emitter } from '@core/emitter'
 import { $ } from '@core/dom'
 import { updateDate } from '@redux/actions'
 import { preventDefault } from '@core/utils'

@@ -1,4 +1,5 @@
-import { ACTION } from "@redux/types"
+import { ACTION } from '@redux/types'
+import { Page } from './Page'
 
 export interface IStore {
   subscribe: (fn: Function) => { unsubscribe: Function }
@@ -23,10 +24,13 @@ export interface IData {
 }
 
 export interface IStyles {
-	textAlign?: string,
-	fontWeight?: string,
-	fontStyle?: string,
-	textDecoration?: string,
- }
+  textAlign?: string
+  fontWeight?: string
+  fontStyle?: string
+  textDecoration?: string
+}
 
- 
+export interface IRoutesModel {
+  dashboard: any
+  excel: any
+}

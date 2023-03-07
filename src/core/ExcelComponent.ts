@@ -1,6 +1,6 @@
 import { IData } from './models' 
 import { IStore } from './models'
-import { Emitter } from './Emitter'
+import { Emitter } from './emitter'
 import { Dom } from './dom'
 import { DomListener } from './DomListener'
 
