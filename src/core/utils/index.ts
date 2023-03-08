@@ -1,5 +1,5 @@
+import { IModelState } from '@core/models'
 import { IStyles } from '../models'
-import { IModelState } from '../models'
 
 export function capitalize(str: string): string {
   if (typeof str !== 'string') {
@@ -17,14 +17,16 @@ export function range(start: number, end: number): number[] {
   return new Array(end - start + 1).fill('').map((_, i) => start + i)
 }
 
-export function storage(key: string, data: IModelState = null): IModelState {
+export function storage(key: string, data?: IModelState): IModelState {
   if (!key) {
     throw new Error('Key is not defined')
   }
   if (!data) {
-    return JSON.parse(localStorage.getItem(key))
+    const storedData = localStorage.getItem(key)
+    return storedData && JSON.parse(storedData)
   }
   localStorage.setItem(key, JSON.stringify(data))
+  return data
 }
 
 export function isEqual(
@@ -42,7 +44,7 @@ export function isEqual(
 
 export function toKebabCase(str: string): string {
   if (typeof str !== 'string') {
-    return
+    return ''
   }
   return str.replace(/[A-Z]/g, m => '-' + m.toLowerCase())
 }
@@ -61,7 +63,7 @@ export function debounce(fn: Function, wait: number) {
       clearTimeout(timeout)
       fn.apply(this, args)
     }
-    
+
     clearTimeout(timeout)
     timeout = setTimeout(later, wait)
   }

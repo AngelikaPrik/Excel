@@ -6,7 +6,7 @@ export class DashboardPage extends Page {
   constructor(...params: ConstructorParameters<typeof Page>) {
     super(...params)
   }
-  getRoot() {
+  override getRoot() {
     const now = Date.now().toString()
     return $.create('div', 'db').html(`
 		<div class="db__header db__view"><h1>Excel tables</h1></div>

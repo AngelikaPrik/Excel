@@ -9,15 +9,14 @@ import { IModelState } from '@core/models'
 const storageName = (param: string): string => `excel:${param}`
 
 export class ExcelPage extends Page {
-  excel: Excel
-  storeSub: {[key:string]: Function}
+  excel!: Excel
+  storeSub: { [key: string]: Function } = {}
 
   constructor(...params: ConstructorParameters<typeof Page>) {
     super(...params)
-    this.storeSub = null
   }
 
-  getRoot() {
+  override getRoot() {
     const params = this.params || Date.now().toString()
     const state = storage(storageName(params))
     const store = createStore(rootReducer, normilizeInitialState(state))
@@ -36,11 +35,11 @@ export class ExcelPage extends Page {
     return this.excel.getRoot()
   }
 
-  afterRender() {
+  override afterRender() {
     this.excel.init()
   }
 
-  destroy() {
+  override destroy() {
     this.excel.destroy()
     this.storeSub.unsubscribe()
   }

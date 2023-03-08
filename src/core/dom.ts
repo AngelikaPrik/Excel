@@ -1,4 +1,4 @@
-import { IStyles } from "./models" 
+import { IStyles } from './models'
 
 export class Dom {
   $el: any
@@ -28,7 +28,7 @@ export class Dom {
     this.html('')
     return this
   }
-  on(eventType: string, callback: Function) {
+  on(eventType: string, callback: Function): void {
     this.$el.addEventListener(eventType, callback)
   }
   off(eventType: string, callback: Function) {
@@ -38,7 +38,7 @@ export class Dom {
     if (node instanceof Dom) {
       node = node.$el
     }
-    if (Element.prototype.append) {
+    if ((Element.prototype as HTMLElement).append) {
       this.$el.append(node)
     } else {
       this.$el.appendChild(node)

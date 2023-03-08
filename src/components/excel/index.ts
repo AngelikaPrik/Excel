@@ -7,7 +7,7 @@ import { ExcelComponent } from '@core/ExcelComponent'
 import { IStore } from '@core/models'
 
 export class Excel {
-  excelComponents: ExcelComponent[]
+  excelComponents: ExcelComponent[] = []
   excelComponentClasses: any[]
   store: IStore
   emitter: Emitter = new Emitter()

@@ -33,3 +33,14 @@ export interface IRoutesModel {
   dashboard: any
   excel: any
 }
+
+export interface IDomListener {
+  addDomListeners(): void
+  removeDomListeners(): void
+}
+
+export interface IRouter {
+  init(): void
+  changePageHandler(): void
+  destroy(): void
+}

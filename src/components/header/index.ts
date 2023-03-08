@@ -21,11 +21,11 @@ export class Header extends ExcelComponent {
     })
   }
 
-  prepare() {
+  override prepare() {
     this.onInput = debounce(this.onInput, 300)
   }
 
-  toHTML() {
+  override toHTML() {
     const title = this.store.getState().title || defaultTitle
 
     return `
@@ -42,12 +42,12 @@ export class Header extends ExcelComponent {
   }
 
   onInput(e: InputEvent) {
-    const $target = $(e.target)
+    const $target = $(e.target as EventTarget)
     this.$dispatch(changeTitle($target.text()))
   }
 
   onClick(e: PointerEvent) {
-    const $target = $(e.target)
+    const $target = $(e.target as EventTarget)
     if ($target.data.button === 'exit') {
       ActiveRoute.navigate('')
     } else if ($target.data.button === 'remove') {

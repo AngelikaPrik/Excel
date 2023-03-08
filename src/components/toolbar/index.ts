@@ -19,24 +19,24 @@ export class Toolbar extends ExcelStateComponent {
     })
   }
 
-  prepare() {
+  override prepare() {
     this.initState(defaultStyles)
   }
 
-  get template() {
+  override get template() {
     return createToolbar(this.state)
   }
 
-  toHTML() {
+  override toHTML() {
     return this.template
   }
 
-  storeChanged(changes: IModelState) {
+  override storeChanged(changes: IModelState) {
     this.setState(changes.currentStyles)
   }
 
   onClick(event: PointerEvent) {
-    const $target = $(event.target)
+    const $target = $(event.target as EventTarget)
 
     if ($target.data.type === 'button') {
       const value = JSON.parse($target.data.value)

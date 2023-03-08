@@ -141,7 +141,7 @@ describe('toKebabCase: ', () => {
 
   test('should return if argument is not a string', () => {
     //  @ts-ignore
-    expect(toKebabCase(123)).toBe()
+    expect(toKebabCase(123)).toBe('')
   })
 })
 

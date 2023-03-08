@@ -1,13 +1,12 @@
 import { $, Dom } from '../dom'
-import { IRoutesModel } from '../models'
+import { IRouter, IRoutesModel } from '../models'
 import { Page } from '../Page'
 import { ActiveRoute } from './ActiveRoute'
 
-export class Router {
+export class Router implements IRouter {
   $placeholder: Dom
   routes: IRoutesModel
-  page: Page
-
+  page: Page | null = null
   constructor(
     selector: HTMLElement | EventTarget | string,
     routes: IRoutesModel
@@ -16,7 +15,7 @@ export class Router {
       throw new Error('Selector is not provided in Router')
     }
     this.$placeholder = $(selector)
-    this.page = null
+    // this.page = null
     this.routes = routes
     this.changePageHandler = this.changePageHandler.bind(this)
     this.init()
@@ -38,10 +37,12 @@ export class Router {
       : this.routes.dashboard
 
     this.page = new Page(ActiveRoute.param)
+    
+    if (this.page) {
+      this.$placeholder.append(this.page.getRoot())
 
-    this.$placeholder.append(this.page.getRoot())
-
-    this.page.afterRender()
+      this.page.afterRender()
+    }
   }
 
   destroy() {

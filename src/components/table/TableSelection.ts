@@ -2,11 +2,10 @@ import { Dom } from '@core/dom'
 export class TableSelection {
   static className = 'selected'
   group: Dom[]
-  current: Dom
+  current: Dom | null = null
 
   constructor() {
     this.group = []
-    this.current = null
   }
 
   select($el: Dom) {

@@ -1,7 +1,5 @@
-import { Dom } from './dom'
-
 export class Page {
-  params: string
+  readonly params: string
 
   constructor(params: string) {
     this.params = params

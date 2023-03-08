@@ -23,15 +23,15 @@ export class Table extends ExcelComponent {
       ...options,
     })
   }
-  toHTML() {
+  override toHTML() {
     return createTable(30, this.store.getState())
   }
 
-  prepare() {
+  override prepare() {
     this.selection = new TableSelection()
   }
 
-  init() {
+  override init() {
     super.init()
     this.selectCell(this.$root.find('[data-id="0:0"]'))
 
@@ -65,10 +65,12 @@ export class Table extends ExcelComponent {
 
   async resizeTable(event: MouseEvent) {
     try {
-      const data: {} = await resizeHandler(this.$root, event)
-      this.$dispatch(actions.tableResize(data))
+      const data = await resizeHandler(this.$root, event)
+      this.$dispatch(actions.tableResize(data as {}))
     } catch (error) {
-      console.warn('Resize error ', error.message)
+      if (error instanceof Error) {
+        console.warn('Resize error ', error.message)
+      }
     }
   }
 
@@ -76,7 +78,7 @@ export class Table extends ExcelComponent {
     if (shouldResize(event)) {
       this.resizeTable(event)
     } else if (isCell(event)) {
-      const $target = $(event.target)
+      const $target = $(event.target as EventTarget)
 
       if (event.shiftKey) {
         const $cells = matrix($target, this.selection.current).map(id =>
@@ -118,6 +120,6 @@ export class Table extends ExcelComponent {
   }
 
   onInput(e: InputEvent) {
-    this.updateTextInStore($(e.target).text())
+    this.updateTextInStore($(e.target as EventTarget).text())
   }
 }

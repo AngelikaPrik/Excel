@@ -93,7 +93,7 @@ export function createTable(rowsCount = 30, state: IModelState) {
     .map(toColumn)
     .join('')
 
-  rows.push(createRow(null, cols, {}))
+  rows.push(createRow(null as unknown as number, cols, {}))
 
   for (let row = 0; row < rowsCount; row++) {
     const cells = new Array(columnCount)

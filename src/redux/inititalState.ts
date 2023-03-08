@@ -19,6 +19,6 @@ const normilize = (state: IModelState): IModelState => ({
   currentText: '',
 })
 
-export const normilizeInitialState = (state: IModelState) => {
+export const normilizeInitialState = (state: IModelState): IModelState => {
   return state ? normilize(state) : clone(defaultState)
 }

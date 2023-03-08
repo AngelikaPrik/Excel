@@ -1,4 +1,4 @@
-import { IData } from './models' 
+import { IData } from './models'
 import { IStore } from './models'
 import { Emitter } from './emitter'
 import { Dom } from './dom'
@@ -41,7 +41,7 @@ export class ExcelComponent extends DomListener {
     return ''
   }
 
-  storeChanged(changes: any) {}
+  storeChanged(_changes: any) {}
 
   isWatching(key: string) {
     return this.subscribe.includes(key)

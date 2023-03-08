@@ -1,7 +1,7 @@
 import { Dom } from './dom'
+import { IDomListener } from './models'
 import { capitalize } from './utils'
-
-export class DomListener {
+export class DomListener implements IDomListener {
   [x: string]: any
   $root: Dom
   listeners: string[]

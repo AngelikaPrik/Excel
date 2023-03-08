@@ -17,14 +17,14 @@ export class Formula extends ExcelComponent {
     })
   }
 
-  toHTML() {
+  override toHTML() {
     return `
     <div class="info">fx</div>
     <div id="formula" class="input" contenteditable spellcheck="false"></div>
     `
   }
 
-  init() {
+  override init() {
     super.init()
 
     this.$formula = this.$root.find('#formula')
@@ -34,12 +34,12 @@ export class Formula extends ExcelComponent {
     })
   }
 
-  storeChanged({ currentText }: IModelState) {
+  override storeChanged({ currentText }: IModelState) {
     this.$formula.text(currentText)
   }
 
   onInput(e: InputEvent) {
-    this.$emit('formula:input', $(e.target).text())
+    this.$emit('formula:input', $(e.target as EventTarget).text())
   }
 
   onKeydown(e: KeyboardEvent) {
