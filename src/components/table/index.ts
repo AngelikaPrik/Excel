@@ -11,7 +11,7 @@ import { parse } from '@core/parse'
 import { IStyles } from '@core/models'
 
 export class Table extends ExcelComponent {
-  static className = 'excel__table'
+  static override className = 'excel__table'
 
   constructor(
     $root: Dom,

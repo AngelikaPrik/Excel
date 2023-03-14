@@ -5,13 +5,14 @@ import { Dom } from './dom'
 import { DomListener } from './DomListener'
 
 export class ExcelComponent extends DomListener {
-  readonly name: string
-  emitter: Emitter
-  subscribe: string[]
-  store: IStore
-  unsubscribers: Function[]
+  override readonly name: string
+  protected emitter: Emitter
+  private subscribe: string[]
+  protected store: IStore
+  private unsubscribers: Function[]
+  static className = ''
 
-  constructor($root: Dom, options: { [key: string]: any } = {}) {
+  constructor($root: Dom, options: Record<string, any> = {}) {
     super($root, options.listeners)
     this.name = options.name || ''
     this.emitter = options.emitter

@@ -1,4 +1,4 @@
-import { IModelState } from '../models'
+import { IState } from '../models'
 import {
   capitalize,
   range,
@@ -65,8 +65,8 @@ describe('range: ', () => {
 })
 
 describe('storage: ', () => {
-  let result: IModelState
-  const data: IModelState = {
+  let result: IState
+  const data: IState = {
     rowState: {},
     colState: {},
     dataState: { '0': '2' },
@@ -93,7 +93,7 @@ describe('storage: ', () => {
   })
 
   test('should return IModelState', () => {
-    expect(result).toMatchObject<IModelState>(data)
+    expect(result).toMatchObject<IState>(data)
   })
 })
 

@@ -7,14 +7,14 @@ import { ExcelComponent } from '@core/ExcelComponent'
 import { IStore } from '@core/models'
 
 export class Excel {
-  excelComponents: ExcelComponent[] = []
-  excelComponentClasses: any[]
-  store: IStore
-  emitter: Emitter = new Emitter()
-  subscriber: StoreSubscriber
+  private excelInstances: ExcelComponent[] = []
+  private excelClasses: Array<typeof ExcelComponent>
+  private store: IStore
+  private emitter: Emitter = new Emitter()
+  private subscriber: StoreSubscriber
 
-  constructor(options: IOptions) {
-    this.excelComponentClasses = options.excelComponentClasses || []
+  constructor(public options: IOptions) {
+    this.excelClasses = options.excelClasses || []
     this.store = options.store
     this.subscriber = new StoreSubscriber(this.store)
   }
@@ -27,7 +27,7 @@ export class Excel {
       store: this.store,
     }
 
-    this.excelComponents = this.excelComponentClasses.map(Component => {
+    this.excelInstances = this.excelClasses.map(Component => {
       const $el = $.create('div', Component.className)
       const component = new Component($el, componentOptions)
       $el.html(component.toHTML())
@@ -45,18 +45,18 @@ export class Excel {
     }
 
     this.store.dispatch(updateDate())
-    this.subscriber.subscribeComponents(this.excelComponents)
-    this.excelComponents.forEach(component => component.init())
+    this.subscriber.subscribeComponents(this.excelInstances)
+    this.excelInstances.forEach(component => component.init())
   }
 
   destroy() {
     this.subscriber.unsubscribeFromStore()
-    this.excelComponents.forEach(component => component.destroy())
+    this.excelInstances.forEach(component => component.destroy())
     document.removeEventListener('contextmenu', preventDefault)
   }
 }
 
 interface IOptions {
-  excelComponentClasses: any[]
+  excelClasses: Array<typeof ExcelComponent>
   store: IStore
 }

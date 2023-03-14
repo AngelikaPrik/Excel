@@ -8,7 +8,7 @@ import { changeTitle } from '@redux/actions'
 import { ActiveRoute } from '@core/routes/ActiveRoute'
 
 export class Header extends ExcelComponent {
-  static className = 'excel__header'
+  static override className = 'excel__header'
 
   constructor(
     $root: Dom,
@@ -20,6 +20,7 @@ export class Header extends ExcelComponent {
       ...options,
     })
   }
+  
 
   override prepare() {
     this.onInput = debounce(this.onInput, 300)

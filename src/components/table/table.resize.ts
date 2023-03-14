@@ -2,9 +2,9 @@ import { Dom } from '@core/dom'
 import { $ } from '@core/dom'
 
 export function resizeHandler($root: Dom, event: MouseEvent) {
-  return new Promise(resolve => {
+  return new Promise<object>(resolve => {
     const $resizer = $(event.target as EventTarget)
-    const resizeType = $resizer.data.resize
+    const resizeType: 'col' | 'row' = $resizer.data.resize
     const $parent = $resizer.closest('[data-type="resizable"]')
     const coords = $parent.getCoords()
     const sideProp = resizeType === 'col' ? 'bottom' : 'right'

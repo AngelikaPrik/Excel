@@ -1,16 +1,17 @@
 import { ACTION } from '@redux/types'
+import { Page } from './Page'
 
 export interface IStore {
   subscribe: (fn: Function) => { unsubscribe: Function }
   dispatch: (action: IData) => void
-  getState: () => IModelState
+  getState: () => IState
 }
 
-export interface IModelState {
-  rowState: object
-  colState: object
-  dataState: { [key: string]: string }
-  stylesState: { [key: string]: { [key: string]: string } }
+export interface IState {
+  rowState: Record<string, number>
+  colState: Record<string, number>
+  dataState: Record<string, string>
+  stylesState: Record<string, Record<string, string>>
   currentStyles: IStyles
   currentText: string
   title: string
@@ -30,8 +31,7 @@ export interface IStyles {
 }
 
 export interface IRoutesModel {
-  dashboard: any
-  excel: any
+  [route: string]: typeof Page
 }
 
 export interface IDomListener {
@@ -44,3 +44,5 @@ export interface IRouter {
   changePageHandler(): void
   destroy(): void
 }
+
+export type SelectorType = string | HTMLElement | EventTarget

@@ -1,4 +1,4 @@
-import { IModelState } from '@core/models'
+import { IState } from '@core/models'
 import { IStyles } from '../models'
 
 export function capitalize(str: string): string {
@@ -17,7 +17,7 @@ export function range(start: number, end: number): number[] {
   return new Array(end - start + 1).fill('').map((_, i) => start + i)
 }
 
-export function storage(key: string, data?: IModelState): IModelState {
+export function storage<T extends IState>(key: string, data?: T): T {
   if (!key) {
     throw new Error('Key is not defined')
   }
@@ -29,10 +29,7 @@ export function storage(key: string, data?: IModelState): IModelState {
   return data
 }
 
-export function isEqual(
-  a: string | number | object,
-  b: string | number | object
-): boolean {
+export function isEqual<T>(a: T, b: T): boolean {
   if (typeof a === 'undefined' || typeof b === 'undefined') {
     throw new Error('Arg is not defined')
   }
@@ -69,7 +66,7 @@ export function debounce(fn: Function, wait: number) {
   }
 }
 
-export function clone(obj: {}) {
+export function clone<T>(obj: T) {
   return JSON.parse(JSON.stringify(obj))
 }
 

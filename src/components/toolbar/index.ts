@@ -1,4 +1,4 @@
-import { IModelState } from '@core/models'
+import { IState } from '@core/models'
 import { Dom } from '@core/dom'
 import { ExcelStateComponent } from '@core/ExcelStateComponent'
 import { createToolbar } from './toolbar.template'
@@ -6,7 +6,7 @@ import { defaultStyles } from '@constants'
 import { $ } from '@core/dom'
 
 export class Toolbar extends ExcelStateComponent {
-  static className = 'excel__toolbar'
+  static override className = 'excel__toolbar'
   constructor(
     $root: Dom,
     options: ConstructorParameters<typeof ExcelStateComponent>
@@ -31,7 +31,7 @@ export class Toolbar extends ExcelStateComponent {
     return this.template
   }
 
-  override storeChanged(changes: IModelState) {
+  override storeChanged(changes: IState) {
     this.setState(changes.currentStyles)
   }
 

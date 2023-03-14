@@ -1,8 +1,5 @@
-interface IListener {
-  [key: string]: Function[]
-}
 export class Emitter {
-  listeners: IListener
+  private listeners: Record<string, Function[]>
   constructor() {
     this.listeners = {}
   }

@@ -1,8 +1,8 @@
 import { defaultTitle, defaultStyles } from '@constants'
-import { IModelState } from '@core/models'
+import { IState } from '@core/models'
 import { clone } from '@core/utils'
 
-const defaultState: IModelState = {
+const defaultState: IState = {
   rowState: {},
   colState: {},
   dataState: {},
@@ -13,12 +13,12 @@ const defaultState: IModelState = {
   openingDate: new Date().toJSON(),
 }
 
-const normilize = (state: IModelState): IModelState => ({
+const normilize = <T extends IState>(state: T): T => ({
   ...state,
   currentStyles: defaultStyles,
   currentText: '',
 })
 
-export const normilizeInitialState = (state: IModelState): IModelState => {
+export const normilizeInitialState = <T extends IState>(state: T): T => {
   return state ? normilize(state) : clone(defaultState)
 }

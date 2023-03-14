@@ -4,13 +4,13 @@ import { Page } from '@core/Page'
 import { debounce, storage } from '@core/utils'
 import { normilizeInitialState } from '@redux/inititalState'
 import { rootReducer } from '@redux/rootReducer'
-import { IModelState } from '@core/models'
+import { IState } from '@core/models'
 
 const storageName = (param: string): string => `excel:${param}`
 
 export class ExcelPage extends Page {
   excel!: Excel
-  storeSub: { [key: string]: Function } = {}
+  storeSub: Record<string, Function> = {}
 
   constructor(...params: ConstructorParameters<typeof Page>) {
     super(...params)
@@ -21,14 +21,14 @@ export class ExcelPage extends Page {
     const state = storage(storageName(params))
     const store = createStore(rootReducer, normilizeInitialState(state))
 
-    const stateListener = debounce((state: IModelState) => {
+    const stateListener = debounce((state: IState) => {
       storage(storageName(params), state)
     }, 500)
 
     this.storeSub = store.subscribe(stateListener)
 
     this.excel = new Excel({
-      excelComponentClasses: [Header, Toolbar, Formula, Table],
+      excelClasses: [Header, Toolbar, Formula, Table],
       store,
     })
 

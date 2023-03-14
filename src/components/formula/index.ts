@@ -1,9 +1,9 @@
 import { $, Dom } from '@core/dom'
 import { ExcelComponent } from '@core/ExcelComponent'
-import { IModelState } from '@core/models'
+import { IState } from '@core/models'
 
 export class Formula extends ExcelComponent {
-  static className = 'excel__formula'
+  static override className = 'excel__formula'
 
   constructor(
     $root: Dom,
@@ -34,7 +34,7 @@ export class Formula extends ExcelComponent {
     })
   }
 
-  override storeChanged({ currentText }: IModelState) {
+  override storeChanged({ currentText }: IState) {
     this.$formula.text(currentText)
   }
 

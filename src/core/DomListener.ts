@@ -1,10 +1,13 @@
 import { Dom } from './dom'
 import { IDomListener } from './models'
 import { capitalize } from './utils'
+
+
 export class DomListener implements IDomListener {
   [x: string]: any
-  $root: Dom
-  listeners: string[]
+  name:string = ''
+  protected $root: Dom
+  private listeners: string[]
 
   constructor($root: Dom, listeners = ['']) {
     if (!$root) throw new Error('No root provided for DomListener')

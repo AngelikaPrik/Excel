@@ -1,8 +1,8 @@
-import { IStyles } from './models'
+import { IStyles, SelectorType } from './models'
 
 export class Dom {
-  $el: any
-  constructor(selector: HTMLElement | EventTarget | string) {
+  private $el: any
+  constructor(selector: SelectorType) {
     this.$el =
       typeof selector === 'string' ? document.querySelector(selector) : selector
   }
@@ -24,17 +24,17 @@ export class Dom {
     }
     return this.$el.textContent.trim()
   }
-  clear() {
+  clear(): this {
     this.html('')
     return this
   }
   on(eventType: string, callback: Function): void {
     this.$el.addEventListener(eventType, callback)
   }
-  off(eventType: string, callback: Function) {
+  off(eventType: string, callback: Function): void {
     this.$el.removeEventListener(eventType, callback)
   }
-  append(node: Dom | HTMLElement) {
+  append(node: Dom | HTMLElement): this {
     if (node instanceof Dom) {
       node = node.$el
     }
@@ -69,11 +69,11 @@ export class Dom {
       return res
     }, {})
   }
-  addClass(className: string) {
+  addClass(className: string): this {
     this.$el.classList.add(className)
     return this
   }
-  removeClass(className: string) {
+  removeClass(className: string): this {
     this.$el.classList.remove(className)
     return this
   }
@@ -96,17 +96,17 @@ export class Dom {
     return this.$el.getAttribute(name)
   }
 
-  focus() {
+  focus(): this {
     this.$el.focus()
     return this
   }
 }
 
-export function $(selector: string | HTMLElement | EventTarget): Dom {
+export function $(selector: SelectorType): Dom {
   return new Dom(selector)
 }
 
-$.create = (tagName: string, classes: string = '') => {
+$.create = (tagName: string, classes: string = ''): Dom => {
   const el = document.createElement(tagName)
   if (classes) {
     el.classList.add(classes)
