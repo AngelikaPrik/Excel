@@ -2,7 +2,7 @@ import { Page } from '../Page'
 import { Router } from './Router'
 
 class DashboardPage extends Page {
-  getRoot() {
+  override getRoot() {
     const root = document.createElement('div')
     root.innerHTML = 'dashboard'
     return root

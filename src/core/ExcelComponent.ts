@@ -1,17 +1,18 @@
-import { IData } from './models' 
+import { IData } from './models'
 import { IStore } from './models'
 import { Emitter } from './emitter'
 import { Dom } from './dom'
 import { DomListener } from './DomListener'
 
 export class ExcelComponent extends DomListener {
-  readonly name: string
-  emitter: Emitter
-  subscribe: string[]
-  store: IStore
-  unsubscribers: Function[]
+  override readonly name: string
+  protected emitter: Emitter
+  private subscribe: string[]
+  protected store: IStore
+  private unsubscribers: Function[]
+  static className = ''
 
-  constructor($root: Dom, options: { [key: string]: any } = {}) {
+  constructor($root: Dom, options: Record<string, any> = {}) {
     super($root, options.listeners)
     this.name = options.name || ''
     this.emitter = options.emitter
@@ -41,7 +42,7 @@ export class ExcelComponent extends DomListener {
     return ''
   }
 
-  storeChanged(changes: any) {}
+  storeChanged(_changes: any) {}
 
   isWatching(key: string) {
     return this.subscribe.includes(key)

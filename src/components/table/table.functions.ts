@@ -1,14 +1,14 @@
 import { Dom } from '@core/dom'
 import { range } from '@core/utils'
 
-export function shouldResize(event: MouseEvent): string {
+export function shouldResize(event: MouseEvent): string | void {
   const target = event.target as HTMLDivElement
   if (target) {
     return target.dataset.resize
   }
 }
 
-export function isCell(event: MouseEvent): boolean {
+export function isCell(event: MouseEvent): boolean | void {
   const target = event.target as HTMLDivElement
   if (target) {
     return target.dataset.type === 'cell'
@@ -22,7 +22,7 @@ export function matrix($target: Dom, $current: Dom) {
   const cols = range(current.col, target.col)
   const rows = range(current.row, target.row)
 
-  return cols.reduce((acc, col) => {
+  return cols.reduce((acc: string[], col) => {
     rows.forEach(row => acc.push(`${row}:${col}`))
     return acc
   }, [])

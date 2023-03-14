@@ -1,21 +1,19 @@
+import { IState, IStore } from '@core/models'
 import { ExcelComponent } from './ExcelComponent'
-import { IModelState, IStore } from './models'
 import { isEqual } from './utils'
 
 export class StoreSubscriber {
-  prevState: IModelState | {}
-  store: IStore
-  sub: any
+  private prevState: IState | {} = {}
+  private store: IStore
+  private sub!: Record<string, Function>
 
   constructor(store: IStore) {
     this.store = store
-    this.sub = null
-    this.prevState = {}
   }
 
   subscribeComponents(components: ExcelComponent[]) {
     this.prevState = this.store.getState()
-    this.sub = this.store.subscribe((state: IModelState) => {
+    this.sub = this.store.subscribe((state: IState) => {
       Object.keys(state).forEach(key => {
         if (
           !isEqual(
@@ -40,4 +38,4 @@ export class StoreSubscriber {
   }
 }
 
-type KeyState = keyof IModelState
+type KeyState = keyof IState

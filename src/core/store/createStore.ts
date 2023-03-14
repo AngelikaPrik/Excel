@@ -1,12 +1,12 @@
-import { IModelState } from '@core/models';
-import { IStore } from './../models';
+import { IState } from '@core/models'
+import { IStore } from './../models'
 export function createStore(
-  rootReducer:Function,
-  initialState:IModelState
-):IStore  {
+  rootReducer: Function,
+  initialState: IState
+): IStore {
   let state = rootReducer({ ...initialState }, { type: 'INIT' })
-  let listeners:Function[]  = []
-  
+  let listeners: Function[] = []
+
   return {
     subscribe(fn) {
       listeners.push(fn)
@@ -25,3 +25,4 @@ export function createStore(
     },
   }
 }
+

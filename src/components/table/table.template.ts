@@ -1,7 +1,7 @@
 import { toInlineStyles } from '@core/utils'
 import { defaultStyles } from '@constants'
 import { parse } from '@core/parse'
-import { IModelState } from '@core/models'
+import { IState } from '@core/models'
 
 enum LETTER_CODES {
   A = 65,
@@ -23,7 +23,7 @@ function toChar(_: null, i: number): string {
   return String.fromCharCode(LETTER_CODES.A + i)
 }
 
-function toCell(state: IModelState, row: number) {
+function toCell(state: IState, row: number) {
   return function (_: null, col: number) {
     const id = `${row}:${col}`
     const width = getWidth(state.colState, col)
@@ -73,7 +73,7 @@ function createRow(index: number, content: string, state = {}) {
   `
 }
 
-function withWidthFrom(state: IModelState) {
+function withWidthFrom(state: IState) {
   return function (col: string, index: number): IColumn {
     return {
       col,
@@ -83,7 +83,7 @@ function withWidthFrom(state: IModelState) {
   }
 }
 
-export function createTable(rowsCount = 30, state: IModelState) {
+export function createTable(rowsCount = 30, state: IState) {
   const columnCount = LETTER_CODES.Z - LETTER_CODES.A + 1
   const rows = []
   const cols = new Array(columnCount)
@@ -93,7 +93,7 @@ export function createTable(rowsCount = 30, state: IModelState) {
     .map(toColumn)
     .join('')
 
-  rows.push(createRow(null, cols, {}))
+  rows.push(createRow(null as unknown as number, cols, {}))
 
   for (let row = 0; row < rowsCount; row++) {
     const cells = new Array(columnCount)

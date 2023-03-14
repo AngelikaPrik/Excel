@@ -1,5 +1,5 @@
+import { IState } from '@core/models'
 import { IStyles } from '../models'
-import { IModelState } from '../models'
 
 export function capitalize(str: string): string {
   if (typeof str !== 'string') {
@@ -17,20 +17,19 @@ export function range(start: number, end: number): number[] {
   return new Array(end - start + 1).fill('').map((_, i) => start + i)
 }
 
-export function storage(key: string, data: IModelState = null): IModelState {
+export function storage<T extends IState>(key: string, data?: T): T {
   if (!key) {
     throw new Error('Key is not defined')
   }
   if (!data) {
-    return JSON.parse(localStorage.getItem(key))
+    const storedData = localStorage.getItem(key)
+    return storedData && JSON.parse(storedData)
   }
   localStorage.setItem(key, JSON.stringify(data))
+  return data
 }
 
-export function isEqual(
-  a: string | number | object,
-  b: string | number | object
-): boolean {
+export function isEqual<T>(a: T, b: T): boolean {
   if (typeof a === 'undefined' || typeof b === 'undefined') {
     throw new Error('Arg is not defined')
   }
@@ -42,7 +41,7 @@ export function isEqual(
 
 export function toKebabCase(str: string): string {
   if (typeof str !== 'string') {
-    return
+    return ''
   }
   return str.replace(/[A-Z]/g, m => '-' + m.toLowerCase())
 }
@@ -61,13 +60,13 @@ export function debounce(fn: Function, wait: number) {
       clearTimeout(timeout)
       fn.apply(this, args)
     }
-    
+
     clearTimeout(timeout)
     timeout = setTimeout(later, wait)
   }
 }
 
-export function clone(obj: {}) {
+export function clone<T>(obj: T) {
   return JSON.parse(JSON.stringify(obj))
 }
 
